@@ -13,7 +13,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-<title>iKnow | Home</title>
+<title>Portfolio</title>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
 
 <!-- STYLES -->
 <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
@@ -117,6 +118,7 @@
 	<!-- /SIDEBAR -->
 	
 	<!-- MAINPART -->
+	
 	<div class="iknow_tm_fixed_mainpart">
 		<div class="mainpart_inner">
 		
@@ -164,6 +166,7 @@
 			<!-- /TOPBAR -->
 			
 			<!-- CONTENT -->
+			<div id="app">
 			<div class="iknow_tm_content_extra">
 			
 				<!-- HOME -->
@@ -176,7 +179,7 @@
 						<div class="hero_content">
 							<div class="left">
 								<span class="hello">Bonjour,Je suis</span>
-								<h3 class="name">Kouassi Patrice</h3>
+								<h3 class="name">{{moi}} Patrice</h3>
 								<p class="text">Futur développeur web en formation</p>
 							</div>
 							<div class="right">
@@ -205,7 +208,7 @@
 										<ul>
 											<li>
 												<h3>Nom</h3>
-												<span>Kouassi Patrice</span>
+												<span>{{moi.nom}} {{moi[prenom]}}</span>
 											</li>
 											<li>
 												<h3>Anniversaire</h3>
@@ -588,6 +591,7 @@
 				<!-- /PORTFOLIO -->
 
 			</div>
+		</div>
 			
 			<!-- COPYRIGHT -->
 			<div class="extra_copyright">
@@ -625,6 +629,67 @@
 <!--[if lt IE 10]> <script type="text/javascript" src="js/ie8.js"></script> <![endif]-->	
 <script src="js/plugins.js"></script>
 <script src="js/init.js"></script>
+
+<script type="module">
+	// Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+    import { getFirestore, collection, getDocs, getDoc, doc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+    import { getDownloadURL, getStorage, ref } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-storage.js";
+    
+	const firebaseConfig = {
+		apiKey: "AIzaSyD_f8tqt5KOP8N_FDNUN46Q_3Fr79PgSIE",
+		authDomain: "portfolio-stage-l3.firebaseapp.com",
+		projectId: "portfolio-stage-l3",
+		storageBucket: "portfolio-stage-l3.appspot.com",
+		messagingSenderId: "814782569024",
+		appId: "1:814782569024:web:6cdfb63c410491554d9da5"
+	};
+
+	// Initialize Firebase
+	const app = initializeApp(firebaseConfig);
+
+	const db=getFirestore(app);
+    const a_propos_de_moiCollection= collection(db, 'a_propos_de_moi');
+
+	const cv1Collection= collection(db, 'cv');
+
+	function getCv1(){
+		getDocs(cv1Collection)
+			.then((snapshot) => {
+				console.log(snapshot)
+			})
+	}
+
+	async function moi(){
+		const moi=await getDoc(doc(db, 'a_propos_de_moi/moi'));
+		var a={};
+			if(moi.exists()){
+				const m=moi.data();
+				console.log(m)
+				console.log(m.nom)
+				a=m;
+			}else {return null}
+			return
+	}
+
+	var vue=new Vue({
+    	el: "#app",
+    	data: {
+			moi : moi(),
+			cv: getCv1(),
+			
+		}, methods: {
+			async moi(){
+				const moi=await getDoc(doc(db, 'a_propos_de_moi/moi'));
+				if(moi.exists()){
+					const m=moi.data();
+					return m;
+				}else {return null}
+			}
+		},
+	})
+
+</script>
 <!-- /SCRIPTS -->
 
 </body>
