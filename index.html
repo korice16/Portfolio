@@ -14,6 +14,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <title>Portfolio</title>
+<!-- Vue js -->
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
 
 <!-- STYLES -->
@@ -97,12 +98,12 @@
 					</li>
 					<li>
 						<img class="svg" src="img/svg/archive.svg" alt="" />
-						<span>About Me</span>
+						<span>À propos de moi</span>
 						<a class="iknow_tm_full_link" href="#about"></a>
 					</li>
 					<li>
 						<img class="svg" src="img/svg/contacs.svg" alt="" />
-						<span>Resume</span>
+						<span>Curriculum vitae</span>
 						<a class="iknow_tm_full_link" href="#resume"></a>
 					</li>
 					<li>
@@ -152,14 +153,11 @@
 				<div class="details">
 					<div class="social">
 						<ul>
-							<li><a href="#"><img class="svg" src="img/svg/social/facebook.svg" alt="" /></a></li>
-							<li><a href="#"><img class="svg" src="img/svg/social/twitter.svg" alt="" /></a></li>
-							<li><a href="#"><img class="svg" src="img/svg/social/youtube.svg" alt="" /></a></li>
-							<li><a href="#"><img class="svg" src="img/svg/social/instagram.svg" alt="" /></a></li>
+							<li><a href="#" id="reseau_linkedin"><img class="svg" src="img/svg/social/linkedin-2.svg" alt="" /></a></li>
 						</ul>
 					</div>
 					<div class="iknow_tm_button">
-						<a href="img/cv/1.jpg" download>Download CV</a>
+						<a href="img/cv/1.jpg" id="mon_cv" download>Télécharger CV</a>
 					</div>
 				</div>
 			</div>
@@ -179,13 +177,13 @@
 						<div class="hero_content">
 							<div class="left">
 								<span class="hello">Bonjour,Je suis</span>
-								<h3 class="name">{{moi}} Patrice</h3>
+								<h3 class="name">{{moi.nom}} {{moi.prenom}}</h3>
 								<p class="text">Futur développeur web en formation</p>
 							</div>
 							<div class="right">
-								<div class="image parallax" data-relative-input="true">
-									<img src="img/thumbs/47-60.jpg" alt="" />
-									<div class="main layer" data-depth="0.05" data-img-url="img/hero/7.jpg"></div>
+								<div class="image parallax" data-relative-input="false">
+									<img src="img/thumbs/47-60.jpg" id="prof" alt="" />
+									<div class="main layer" data-depth="0.05" data-img-url="img/hero/patrice_photo.jpg" id="photo_profil"></div>
 									<span class="box layer" data-depth="0.1"></span>
 								</div>
 							</div>
@@ -201,22 +199,26 @@
 							<div class="left">
 								<div class="left_inner">
 									<div class="image">
-										<img src="img/thumbs/35-44.jpg" alt="" />
-										<div class="main" data-img-url="img/hero/7.jpg"></div>
+										<img src="img/thumbs/35-44.jpg" id="prof2" alt="" />
+										<div class="main" data-img-url="img/hero/patrice_photo.jpg" id="prof3"></div>
 									</div>
 									<div class="details">
 										<ul>
 											<li>
 												<h3>Nom</h3>
-												<span>{{moi.nom}} {{moi[prenom]}}</span>
+												<span>{{moi.nom}}</span>
 											</li>
 											<li>
-												<h3>Anniversaire</h3>
-												<span>3 Avril, 2021</span>
+												<h3>Prenom</h3>
+												<span>{{moi.prenom}}</span>
+											</li>
+											<li>
+												<h3>Âge</h3>
+												<span>21 ans</span>
 											</li>
 											<li>
 												<h3>Mail</h3>
-												<span>Korice16@gmail.com</span>
+												<span>{{moi.mail}}</span>
 											</li>
 											<li>
 												<h3>Télèphone</h3>
@@ -224,11 +226,11 @@
 											</li>
 											<li>
 												<h3>Addresse</h3>
-												<span>Sucy-en-Brie, France</span>
+												<span>{{moi.adresse}}</span>
 											</li>
 											<li>
 												<h3>Nationalité</h3>
-												<span>Italien</span>
+												<span>{{moi.nationalite}}</span>
 											</li>
 										</ul>
 									</div>
@@ -236,17 +238,17 @@
 							</div>
 							<div class="right">
 								<div class="iknow_tm_main_title">
-									<span>About Me</span>
-									<h3>Développeur web</h3>
+									<span>À propos de moi</span>
+									<h3>{{futur_metier.intitule}}</h3>
 								</div>
 								<div class="bigger_text">
-									<p>Un passioné de la programmation de sites web situé à Paris, en France</p>
+									<p>{{futur_metier.sous_titre}}</p>
 								</div>
 								<div class="text">
-									<p>Hi! My name is Jassone Doe. I am UI/UX designer, and I'm very passionate and dedicated to my work. With 20 years experience as a professional graphic designer, I have acquired the skills and knowledge necessary to make your project a success.</p>
+									<p>{{futur_metier.presentation}}</p>
 								</div>
 								<div class="iknow_tm_button">
-									<a href="img/cv/1.jpg" download>Télécharger CV</a>
+									<a href="img/cv/1.jpg" id="mon_cv_about" download>Télécharger CV</a>
 								</div>
 							</div>
 						</div>
@@ -259,10 +261,8 @@
 					<div class="section_inner">
 						<div class="iknow_tm_resume">
 							<div class="iknow_tm_main_title">
-								<span>Resume</span>
-								<h3>Combination of Skill &amp; Experience</h3>
+								<span>Curriculum vitae</span>
 							</div>
-							tets-------------------------------------------------------------------------------------------------------
 
 							<div class="info_list">
 								<div class="iknow_tm_resume_title">
@@ -270,52 +270,35 @@
 									<span class="shape"></span>
 								</div>
 								<ul>
-									<li>
+									<li v-for="item in cv.formation">
 										<div class="list_inner">
 											<div class="short">
 												<div class="job">
-													<h3>Licence 3 Informatique</h3>
-													<span>Université Paris-Est Créteil (UPEC)</span>
+													<h3>{{item.intitule}}</h3>
+													<span>{{item.etablissement}}, {{item.lieu}}</span>
 												</div>
 												<div class="year">
-													<span>Depuis<br> Septembre 2021</span>
+													<span>{{item.date}}</span>
 												</div>
-											</div>
-											<div class="text">
-												<p>The goal of cognitive science is to understand the principles of intelligence with the hope that this will lead to better comprehension.</p>
 											</div>
 										</div>
 									</li>
-									<li>
+								</ul>
+							</div>
+
+							<div class="info_list">
+								<div class="iknow_tm_resume_title">
+									<h3>Compétences techniques</h3>
+									<span class="shape"></span>
+								</div>
+								<ul>
+									<li v-for="(value,name) in competence_techniqu">
 										<div class="list_inner">
 											<div class="short">
 												<div class="job">
-													<h3>Baccalauréat série Scientifique spécialité Sciences de
-														l'Ingénieur</h3>
-													<span>Lycée Parc des Loges</span>
+													<h3>{{name}} :</h3> 
+													<span>{{value}}</span>
 												</div>
-												<div class="year">
-													<span>Juillet 2019</span>
-												</div>
-											</div>
-											<div class="text">
-												<p>Civil engineering is arguably the oldest engineering discipline. It deals with the built environment and can be dated to the first time someone placed a roof.</p>
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="list_inner">
-											<div class="short">
-												<div class="job">
-													<h3>Bachelor of Science</h3>
-													<span>Univercity of Dhaka</span>
-												</div>
-												<div class="year">
-													<span>2012 - 2015</span>
-												</div>
-											</div>
-											<div class="text">
-												<p>This project is called a thesis and is usually presented in front of a group of people, including university professors who will evaluate it and let the student..</p>
 											</div>
 										</div>
 									</li>
@@ -328,81 +311,34 @@
 									<span class="shape"></span>
 								</div>
 								<ul>
-									<li>
+									<li v-for="item in cv.exp_professionelle">
 										<div class="list_inner">
 											<div class="short">
 												<div class="job">
-													<h3>UI/UX Designer</h3>
-													<span>Envato Market</span>
+													<h3>{{item.intitule}}</h3>
+													<span>{{item.entreprise}}, {{item.lieu}}</span>
 												</div>
 												<div class="year">
-													<span>2018 - running</span>
+													<span>{{item.date}}</span>
 												</div>
 											</div>
 											<div class="text">
-												<p>Web Developers are build a website’s core structure using coding languages, while designers are more visually creative and user-focused.</p>
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="list_inner">
-											<div class="short">
-												<div class="job">
-													<h3>Creative Designer</h3>
-													<span>Bahanno Digital</span>
-												</div>
-												<div class="year">
-													<span>2015 - 2017</span>
-												</div>
-											</div>
-											<div class="text">
-												<p>Web Developers are build a website’s core structure using coding languages, while designers are more visually creative and user-focused.</p>
+												<p>{{item.description}}</p>
 											</div>
 										</div>
 									</li>
 								</ul>
 							</div>
-						
-						
-							<div class="skills_list">
+
+							<div class="info_list">
 								<div class="iknow_tm_resume_title">
-									<h3>Personal Skills</h3>
+									<h3>Langues</h3>
 									<span class="shape"></span>
 								</div>
-								<ul>
-									<li>Travail d'équipe</li>
-									<li>Adaptation</li>
-								</ul>
+								<br><br>
+								<h5><p v-for="value in cv.langues">{{value.intitule}}: {{value.niveau}}</p></h5>
+
 							</div>
-							<div class="skills_list">
-								<div class="iknow_tm_resume_title">
-									<h3>Compétences techniques</h3>
-									<span class="shape"></span>
-								</div>
-								<br/>									
-								<ul>
-									<li>												
-										<h3>Langages :</h3> HTML, CSS, PHP, SQL, Bootstrap, Laravel, JavaScript,
-										OCAML, C++, Python, Java, Lua																							
-									</li>
-									<br/>
-									<li>												
-										<div class="title"><h4>Logiciels de programmation :</h4></div>
-										Notepad++, EasyPHP-12.0, PhpStorm, Bluej, VsCode, MySQL, Laravel, Eclipse, Android Studio, Anaconda												
-									</li>
-									<br/>
-									<li>												
-										<div class="title"><h4>Développement</h4></div>	Méthode Agile										
-									</li>
-									<br/>
-									<li>												
-										<div class="title"><h4>Logiciels bureautiques</h4></div> Word, PowerPoint, Excel, GIT											
-									</li>
-								</ul>
-																	
-							</div>
-						
-					
 						</div>
 					</div>
 				</div>
@@ -413,96 +349,17 @@
 					<div class="section_inner">
 						<div class="iknow_tm_portfolio">
 							<div class="iknow_tm_main_title">
-								<span>Resume</span>
-								<h3>My works that I did for clients</h3>
+								<span>Portfolio</span>
+								<h3>Mes projets réaliser</h3>
 							</div>
 							<div class="portfolio_filter">
 								<ul>
 									<li><a href="#" class="current" data-filter="*">All</a></li>
-									<li><a href="#" data-filter=".vimeo">Vimeo</a></li>
-									<li><a href="#" data-filter=".youtube">Youtube</a></li>
-									<li><a href="#" data-filter=".soundcloud">Soundcloud</a></li>
 									<li><a href="#" data-filter=".detail">Detail</a></li>
 								</ul>
 							</div>
 							<div class="portfolio_list">
-								<ul class="gallery_zoom">
-									<li class="vimeo">
-										<div class="list_inner">
-											<div class="image">
-												<img src="img/thumbs/1-1.jpg" alt="" />
-												<div class="main" data-img-url="img/portfolio/1.jpg"></div>
-											</div>
-											<div class="overlay"></div>
-											<img class="svg" src="img/svg/social/vimeo.svg" alt="" />
-											<div class="details">
-												<span>Vimeo</span>
-												<h3>Aumeo Audio</h3>
-											</div>
-											<a class="iknow_tm_full_link popup-vimeo" href="https://vimeo.com/337293658"></a>
-										</div>
-									</li>
-									<li class="youtube">
-										<div class="list_inner">
-											<div class="image">
-												<img src="img/thumbs/1-1.jpg" alt="" />
-												<div class="main" data-img-url="img/portfolio/2.jpg"></div>
-											</div>
-											<div class="overlay"></div>
-											<img class="svg" src="img/svg/social/youtube-2.svg" alt="" />
-											<div class="details">
-												<span>Youtube</span>
-												<h3>Bicker &amp; Jenna</h3>
-											</div>
-											<a class="iknow_tm_full_link popup-youtube" href="https://www.youtube.com/watch?v=7e90gBu4pas"></a>
-										</div>
-									</li>
-									<li class="soundcloud">
-										<div class="list_inner">
-											<div class="image">
-												<img src="img/thumbs/1-1.jpg" alt="" />
-												<div class="main" data-img-url="img/portfolio/3.jpg"></div>
-											</div>
-											<div class="overlay"></div>
-											<img class="svg" src="img/svg/social/soundcloud.svg" alt="" />
-											<div class="details">
-												<span>Soundcloud</span>
-												<h3>Botanical Escape</h3>
-											</div>
-											<a class="iknow_tm_full_link soundcloude_link mfp-iframe audio" href="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/471954807&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></a>
-										</div>
-									</li>
-
-									<li class="youtube">
-										<div class="list_inner">
-											<div class="image">
-												<img src="img/thumbs/1-1.jpg" alt="" />
-												<div class="main" data-img-url="img/portfolio/6.jpg"></div>
-											</div>
-											<div class="overlay"></div>
-											<img class="svg" src="img/svg/social/youtube-2.svg" alt="" />
-											<div class="details">
-												<span>Youtube</span>
-												<h3>Model Car</h3>
-											</div>
-											<a class="iknow_tm_full_link popup-youtube" href="https://www.youtube.com/watch?v=l-epKcOA7RQ"></a>
-										</div>
-									</li>
-									<li class="vimeo">
-										<div class="list_inner">
-											<div class="image">
-												<img src="img/thumbs/1-1.jpg" alt="" />
-												<div class="main" data-img-url="img/portfolio/7.jpg"></div>
-											</div>
-											<div class="overlay"></div>
-											<img class="svg" src="img/svg/social/vimeo.svg" alt="" />
-											<div class="details">
-												<span>Vimeo</span>
-												<h3>Smart Watch</h3>
-											</div>
-											<a class="iknow_tm_full_link popup-vimeo" href="https://vimeo.com/337292310"></a>
-										</div>
-									</li>
+								<ul class="gallery_zoom">									
 									<li class="detail">
 										<div class="list_inner">
 											<div class="image">
@@ -513,7 +370,7 @@
 											<img class="svg" src="img/svg/text.svg" alt="" />
 											<div class="details">
 												<span>Detail</span>
-												<h3>Teresa Melbig</h3>
+												<h3>Portfolio</h3>
 											</div>
 											<a class="iknow_tm_full_link portfolio_popup" href="#"></a>
 
@@ -521,22 +378,22 @@
 												<div class="popup_details">
 													<div class="main_details">
 														<div class="textbox">
-															<p>We live in a world where we need to move quickly and iterate on our ideas as flexibly as possible. Building mockups strikes the ideal balance ease of modification.</p>
+															<p>Création d'un Portfolio à l'aide de de vue et Firebase</p>
 															<p>Mockups are useful both for the creative phase of the project - for instance when you're trying to figure out your user flows or the proper visual hierarchy - and the production phase when they will represent the target product.</p>
 														</div>
 														<div class="detailbox">
 															<ul>
 																<li>
 																	<span class="first">Client</span>
-																	<span>Alvaro Morata</span>
+																	<span>Moi</span>
 																</li>
 																<li>
-																	<span class="first">Category</span>
-																	<span><a href="#">Detail</a></span>
+																	<span class="first">Plus d'information</span>
+																	<span><a href="#">Lien du site</a></span>
 																</li>
 																<li>
 																	<span class="first">Date</span>
-																	<span>March 07, 2021</span>
+																	<span>28/04/2022</span>
 																</li>
 																<li>
 																	<span class="first">Share</span>
@@ -589,29 +446,9 @@
 					</div>
 				</div>
 				<!-- /PORTFOLIO -->
-
+				
 			</div>
 		</div>
-			
-			<!-- COPYRIGHT -->
-			<div class="extra_copyright">
-				<div class="iknow_tm_copyright">
-					<div class="inner">
-						<div class="left">
-							<p>Designed with love &copy; <a href="https://themeforest.net/user/marketify" target="_blank">Marketify</a></p>
-						</div>
-						<div class="right">
-							<ul>
-								<li><a href="#">Terms &amp; Condition</a></li>
-								<li><a href="#">Privacy Policy</a></li>
-								<li><a href="#">Login</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- /COPYRIGHT -->
-			
 		</div>
 	</div>
 	<!-- /MAINPART -->
@@ -649,42 +486,98 @@
 	const app = initializeApp(firebaseConfig);
 
 	const db=getFirestore(app);
+	const storage=getStorage();
+	//const cvRef=ref(storage, 'Above/CV_KOUASSI.pdf');
     const a_propos_de_moiCollection= collection(db, 'a_propos_de_moi');
 
 	const cv1Collection= collection(db, 'cv');
 
-	function getCv1(){
-		getDocs(cv1Collection)
-			.then((snapshot) => {
-				console.log(snapshot)
-			})
-	}
-
-	async function moi(){
-		const moi=await getDoc(doc(db, 'a_propos_de_moi/moi'));
-		var a={};
-			if(moi.exists()){
-				const m=moi.data();
-				console.log(m)
-				console.log(m.nom)
-				a=m;
-			}else {return null}
-			return
-	}
-
 	var vue=new Vue({
     	el: "#app",
     	data: {
-			moi : moi(),
-			cv: getCv1(),
-			
-		}, methods: {
-			async moi(){
-				const moi=await getDoc(doc(db, 'a_propos_de_moi/moi'));
-				if(moi.exists()){
-					const m=moi.data();
-					return m;
-				}else {return null}
+			moi : {},
+			reseaux_sociaux: {},
+			futur_metier: {},
+			cv: {},
+			competence_techniqu: {},
+			cv_url: null,
+			photo_profil:null			
+		},
+		created() {
+			this.set_photo_profile();
+			this.a_propos_de_moi();
+			this.a_propos_de_moi_reseaux_sociaux();
+			this.cv_cv1();
+			this.cv_competence_techniques();
+		}, 
+		methods: {
+			a_propos_de_moi(){
+				getDocs(collection(db, 'a_propos_de_moi'))
+					.then(snapshot => {	
+						snapshot.docs.forEach( doc => {
+							console.log(doc.data())
+							if(doc.id==="moi") this.moi=doc.data();
+							if(doc.id==="futur_metier") this.futur_metier=doc.data();
+							if(doc.id==="reseaux_sociaux") this.reseaux_sociaux=doc.data();
+						})
+					})
+					.catch( err => {
+						console.log(err)
+					})
+			},
+			a_propos_de_moi_reseaux_sociaux(){
+				getDoc(doc(db,'a_propos_de_moi/reseaux_sociaux'))
+					.then(snap => {
+						if(snap.exists()){
+							//console.log(snap.data().linkedin)
+							const link=document.getElementById("reseau_linkedin");
+							link.setAttribute('href', snap.data().linkedin)
+						}
+					})
+			},
+			async cv_cv1(){
+				const rep= await getDoc(doc(db,'cv/cv1'));
+				if(rep.exists()){
+					this.cv=rep.data();
+					this.competence_techniqu=rep.data().competence_techniques;
+					console.log(this.competence_techniqu.Langages)
+					//console.log(rep.data())
+					//console.log((this.cv.competence_techniques).Langages)
+				}
+			},
+			async cv_competence_techniques(){
+				//console.log("test");
+				//console.log(this.cv);
+				//console.log((this.cv.competence_techniques).Langages);
+				this.competence_techniqu=this.cv.competence_techniques;
+			},
+			set_photo_profile(){
+				getDownloadURL(ref(storage,'img/a_propos_de_moi/patrice_photo.jpg'))
+					.then(url => {
+						console.log(url);
+						//this.cv_url=url;
+						this.photo_profil=url;
+						const img=document.getElementById('prof2');
+						const img2=document.getElementById('prof3');
+                		img.setAttribute('src',url)
+						img.setAttribute('data-img-url',url)
+					})
+					.catch((error) => {
+						console.log(error.message)
+					});
+
+				getDownloadURL(ref(storage,'img/cv/CV_KOUASSI.pdf'))
+					.then(url => {
+						//console.log(url);
+						this.cv_url=url;
+						const img=document.getElementById('mon_cv');
+                		img.setAttribute('href',url);
+						const img2=document.getElementById('mon_cv_about');
+                		img2.setAttribute('href',url)
+					})
+					.catch((error) => {
+						console.log(error.message)
+					})
 			}
 		},
 	})
