@@ -59,7 +59,7 @@
 		<div class="mobile_menu_inner">
 			<div class="mobile_in">
 				<div class="logo">
-					<a href="#"><img src="img/logo/dark.png" alt="" /></a>
+					<a href="#"><img src="img/logo/rect_blanc.pngadd_" alt="" /></a>
 				</div>
 				<div class="trigger">
 					<div class="hamburger hamburger--slider">
@@ -87,7 +87,7 @@
 	<div class="iknow_tm_sidebar_2">
 		<div class="sidebar_inner">
 			<div class="logo">
-				<a href="#"><img src="img/logo/dark.png" alt="" /></a>
+				<a href="#"><img src="img/logo/rect_blanc.png" alt="" /></a>
 			</div>
 			<div class="menu transition_link">
 				<ul>
@@ -221,10 +221,6 @@
 												<span>{{moi.mail}}</span>
 											</li>
 											<li>
-												<h3>Télèphone</h3>
-												<span>+123 456 7890</span>
-											</li>
-											<li>
 												<h3>Addresse</h3>
 												<span>{{moi.adresse}}</span>
 											</li>
@@ -350,7 +346,7 @@
 						<div class="iknow_tm_portfolio">
 							<div class="iknow_tm_main_title">
 								<span>Portfolio</span>
-								<h3>Mes projets réaliser</h3>
+								<h3>Mes projets réalisés</h3>
 							</div>
 							<div class="portfolio_filter">
 								<ul>
@@ -359,12 +355,12 @@
 								</ul>
 							</div>
 							<div class="portfolio_list">
-								<ul class="gallery_zoom">									
+								<ul class="gallery_zoom">
 									<li class="detail">
 										<div class="list_inner">
 											<div class="image">
 												<img src="img/thumbs/1-1.jpg" alt="" />
-												<div class="main" data-img-url="img/portfolio/8.jpg"></div>
+												<div class="main" data-img-url="img/portfolio/porto/couverture.png"></div>
 											</div>
 											<div class="overlay"></div>
 											<img class="svg" src="img/svg/text.svg" alt="" />
@@ -375,34 +371,19 @@
 											<a class="iknow_tm_full_link portfolio_popup" href="#"></a>
 
 											<div class="hidden_content">
+												<a :href="link_refresh">Retour </a>
+												
 												<div class="popup_details">
 													<div class="main_details">
-														<div class="textbox">
-															<p>Création d'un Portfolio à l'aide de de vue et Firebase</p>
-															<p>Mockups are useful both for the creative phase of the project - for instance when you're trying to figure out your user flows or the proper visual hierarchy - and the production phase when they will represent the target product.</p>
+														<div class="textbox">														
+															<p>Création d'un Portfolio à l'aide de Vue et Firebase Firestore et Storage.</p>
+															<p>Ensuite le projet à été hébèrger en ligne sur Cloudflare Workers avec l'achat d'un nom de domaine.</p>
 														</div>
 														<div class="detailbox">
 															<ul>
 																<li>
-																	<span class="first">Client</span>
-																	<span>Moi</span>
-																</li>
-																<li>
-																	<span class="first">Plus d'information</span>
-																	<span><a href="#">Lien du site</a></span>
-																</li>
-																<li>
 																	<span class="first">Date</span>
 																	<span>28/04/2022</span>
-																</li>
-																<li>
-																	<span class="first">Share</span>
-																	<ul class="share">
-																		<li><a href="#"><img class="svg" src="img/svg/social/facebook.svg" alt="" /></a></li>
-																		<li><a href="#"><img class="svg" src="img/svg/social/twitter.svg" alt="" /></a></li>
-																		<li><a href="#"><img class="svg" src="img/svg/social/instagram.svg" alt="" /></a>
-																		</li>
-																	</ul>
 																</li>
 															</ul>
 														</div>
@@ -413,7 +394,7 @@
 																<div class="list_inner">
 																	<div class="my_image">
 																		<img src="img/thumbs/4-2.jpg" alt="" />
-																		<div class="main" data-img-url="img/portfolio/1.jpg"></div>
+																		<div class="main" data-img-url="img/portfolio/porto/add_img1.png"></div>
 																	</div>
 																</div>
 															</li>
@@ -421,7 +402,7 @@
 																<div class="list_inner">
 																	<div class="my_image">
 																		<img src="img/thumbs/4-2.jpg" alt="" />
-																		<div class="main" data-img-url="img/portfolio/2.jpg"></div>
+																		<div class="main" data-img-url="img/portfolio/porto/add_img2.png"></div>
 																	</div>
 																</div>
 															</li>
@@ -429,7 +410,7 @@
 																<div class="list_inner">
 																	<div class="my_image">
 																		<img src="img/thumbs/4-2.jpg" alt="" />
-																		<div class="main" data-img-url="img/portfolio/3.jpg"></div>
+																		<div class="main" data-img-url="img/portfolio/porto/add_img3.png"></div>
 																	</div>
 																</div>
 															</li>
@@ -438,15 +419,13 @@
 												</div>
 											</div>
 										</div>
-									</li>
-
+									</li>	
 								</ul>
 							</div>
 						</div>
 					</div>
 				</div>
-				<!-- /PORTFOLIO -->
-				
+				<!-- /PORTFOLIO -->				
 			</div>
 		</div>
 		</div>
@@ -468,18 +447,12 @@
 <script src="js/init.js"></script>
 
 <script type="module">
-	// Import the functions you need from the SDKs you need
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
     import { getFirestore, collection, getDocs, getDoc, doc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
-    import { getDownloadURL, getStorage, ref } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-storage.js";
+    import { getDownloadURL, getStorage, ref, listAll } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-storage.js";
     
 	const firebaseConfig = {
-		apiKey: "AIzaSyD_f8tqt5KOP8N_FDNUN46Q_3Fr79PgSIE",
-		authDomain: "portfolio-stage-l3.firebaseapp.com",
-		projectId: "portfolio-stage-l3",
-		storageBucket: "portfolio-stage-l3.appspot.com",
-		messagingSenderId: "814782569024",
-		appId: "1:814782569024:web:6cdfb63c410491554d9da5"
+
 	};
 
 	// Initialize Firebase
@@ -487,10 +460,6 @@
 
 	const db=getFirestore(app);
 	const storage=getStorage();
-	//const cvRef=ref(storage, 'Above/CV_KOUASSI.pdf');
-    const a_propos_de_moiCollection= collection(db, 'a_propos_de_moi');
-
-	const cv1Collection= collection(db, 'cv');
 
 	var vue=new Vue({
     	el: "#app",
@@ -501,7 +470,9 @@
 			cv: {},
 			competence_techniqu: {},
 			cv_url: null,
-			photo_profil:null			
+			photo_profil:null,
+			link_refresh : null,
+			portfolio2 : []			
 		},
 		created() {
 			this.set_photo_profile();
@@ -509,13 +480,15 @@
 			this.a_propos_de_moi_reseaux_sociaux();
 			this.cv_cv1();
 			this.cv_competence_techniques();
+			this.link_refresh=window.location.href;
+			this.portfolio_recup();
 		}, 
 		methods: {
 			a_propos_de_moi(){
 				getDocs(collection(db, 'a_propos_de_moi'))
 					.then(snapshot => {	
 						snapshot.docs.forEach( doc => {
-							console.log(doc.data())
+							//console.log(doc.data())
 							if(doc.id==="moi") this.moi=doc.data();
 							if(doc.id==="futur_metier") this.futur_metier=doc.data();
 							if(doc.id==="reseaux_sociaux") this.reseaux_sociaux=doc.data();
@@ -530,8 +503,8 @@
 					.then(snap => {
 						if(snap.exists()){
 							//console.log(snap.data().linkedin)
-							const link=document.getElementById("reseau_linkedin");
-							link.setAttribute('href', snap.data().linkedin)
+							const link_t=document.getElementById("reseau_linkedin");
+							link_t.setAttribute('href', snap.data().linkedin)
 						}
 					})
 			},
@@ -540,7 +513,7 @@
 				if(rep.exists()){
 					this.cv=rep.data();
 					this.competence_techniqu=rep.data().competence_techniques;
-					console.log(this.competence_techniqu.Langages)
+					//console.log(this.competence_techniqu.Langages)
 					//console.log(rep.data())
 					//console.log((this.cv.competence_techniques).Langages)
 				}
@@ -554,7 +527,7 @@
 			set_photo_profile(){
 				getDownloadURL(ref(storage,'img/a_propos_de_moi/patrice_photo.jpg'))
 					.then(url => {
-						console.log(url);
+						//console.log(url);
 						//this.cv_url=url;
 						this.photo_profil=url;
 						const img=document.getElementById('prof2');
@@ -578,6 +551,46 @@
 					.catch((error) => {
 						console.log(error.message)
 					})
+			},
+			portfolio_recup(){
+				getDocs(collection(db,'portfolio'))
+					.then( snap => {						
+						var porto={};
+						snap.docs.forEach(doc => {
+							let img_couv='img/portfolio/'+doc.id+'/couverture.PNG';
+							let s={};
+							console.log(img_couv)
+							console.log(doc.data())
+							s.doc=doc.data();
+							listAll(ref(storage,'img/portfolio/'+doc.id))
+								.then((res) => {
+									console.log(res)
+									let img_additional=[];
+									res.items.forEach((itemRef) => {
+										getDownloadURL(ref(storage,itemRef._location.path_ ))
+											.then((url) => {
+												if(itemRef._location.path_==img_couv) {
+													s.img_couverture=url;
+													//console.log(url)
+												}else {
+													img_additional.push(url);
+													//img_additional.push("gs://"+itemRef.bucket+"/"+itemRef._location.path_)
+													//console.log(url)
+												}
+											})
+										//console.log(itemRef);
+									})
+									s.img_additionelle=img_additional;
+									//console.log(img_additional)
+								})
+								this.portfolio2.push(s)
+								//console.log(s)
+						})
+						//console.log(this.portfolio)
+					})
+					.catch((error) => {
+						console.log(error.message)
+					})					
 			}
 		},
 	})
