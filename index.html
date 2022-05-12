@@ -28,16 +28,11 @@
 <!--[if lt IE 9]> <script type="text/javascript" src="js/modernizr.custom.js"></script> <![endif]-->
 <!-- /STYLES -->
 
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
 <body> 
-	
-	<!-- PRELOADER -->
-	<div id="preloader">
-		<div class="loader_line"></div>
-	</div>
-	<!-- /PRELOADER -->
-	
+		
 <!-- WRAPPER ALL -->
 <!--<div class="iknow_tm_all_wrap" data-magic-cursor="show" data-animation-in="rotateInDownLeft" data-animation-out="rotateOutDownLeft"> -->
 <div class="iknow_tm_all_wrap" data-magic-cursor="hide" data-enter="zoomIn" data-exit="zoomOut">
@@ -342,100 +337,55 @@
 				
 				<!-- PORTFOLIO -->
 				<div class="iknow_tm_animate_section" id="portfolio">
-					<div class="section_inner">
-						<div class="iknow_tm_portfolio">
-							<div class="iknow_tm_main_title">
-								<span>Portfolio</span>
-								<h3>Mes projets réalisés</h3>
-							</div>
-							<div class="portfolio_filter">
-								<ul>
-									<li><a href="#" class="current" data-filter="*">All</a></li>
-									<li><a href="#" data-filter=".detail">Detail</a></li>
-								</ul>
-							</div>
-							<div class="portfolio_list">
-								<ul class="gallery_zoom">
-									<li class="detail">
-										<div class="list_inner">
-											<div class="image">
-												<img src="img/thumbs/1-1.jpg" alt="" />
-												<div class="main" data-img-url="img/portfolio/porto/couverture.png"></div>
-											</div>
-											<div class="overlay"></div>
-											<img class="svg" src="img/svg/text.svg" alt="" />
-											<div class="details">
-												<span>Detail</span>
-												<h3>Portfolio</h3>
-											</div>
-											<a class="iknow_tm_full_link portfolio_popup" href="#"></a>
+					<section class="protfolio">
+						<h1><b>Portfolio</b></h1><br>
+						<div class="container">
+							<div class="row">
+								<div class="col-md-4" v-for="item in portfolio2">
+									<b-button class="button-custome" v-on:click="$bvModal.show(item.doc.intitule)" variant="outline-secondary" style="width:100%" >
+										<img alt="Vue logo" class="rounded-circle img-custome" :src="item.img_couverture"> 
+										<h2>{{item.doc.intitule}}</h2>
+									</b-button>
+									<b-modal :id="item.doc.intitule" size="xl" scrollable >
+										<template #modal-header="{ close }">
+											<h5>{{item.doc.intitule}}</h5>
+											<b-button size="sm" variant="outline-danger" @click="close()">
+												X
+											</b-button>
+										</template>
+																			  
+										<div>
+											<b-img class="b-img" thumbnail fluid alt="img_couverture" :src="item.img_couverture" >											
+										</div>
+										<div>
+											<div>
 
-											<div class="hidden_content">
-												<a :href="link_refresh">Retour </a>
-												
-												<div class="popup_details">
-													<div class="main_details">
-														<div class="textbox">														
-															<p>Création d'un Portfolio à l'aide de Vue et Firebase Firestore et Storage.</p>
-															<p>Ensuite le projet à été hébèrger en ligne sur Cloudflare Workers avec l'achat d'un nom de domaine.</p>
-														</div>
-														<div class="detailbox">
-															<ul>
-																<li>
-																	<span class="first">Date</span>
-																	<span>28/04/2022</span>
-																</li>
-															</ul>
-														</div>
-													</div>
-													<div class="additional_images">
-														<ul>
-															<li>
-																<div class="list_inner">
-																	<div class="my_image">
-																		<img src="img/thumbs/4-2.jpg" alt="" />
-																		<div class="main" data-img-url="img/portfolio/porto/add_img1.png"></div>
-																	</div>
-																</div>
-															</li>
-															<li>
-																<div class="list_inner">
-																	<div class="my_image">
-																		<img src="img/thumbs/4-2.jpg" alt="" />
-																		<div class="main" data-img-url="img/portfolio/porto/add_img2.png"></div>
-																	</div>
-																</div>
-															</li>
-															<li>
-																<div class="list_inner">
-																	<div class="my_image">
-																		<img src="img/thumbs/4-2.jpg" alt="" />
-																		<div class="main" data-img-url="img/portfolio/porto/add_img3.png"></div>
-																	</div>
-																</div>
-															</li>
-														</ul>
-													</div>
+											</div>
+											<h5>Details</h5>
+											<p v-for="descript in item.doc.description">
+												{{descript}}
+											</p>
+										</div>
+										<div>
+											<div class="row" class="img-add-portfolio">
+												<div class="col-md-6" v-for="value in item.img_additionelle">
+													<b-img  thumbnail fluid alt="timg_add" class="b-img" :src="value" style="width:100%; height:100%"></b-img>
 												</div>
 											</div>
 										</div>
-									</li>	
-								</ul>
-							</div>
+									</b-modal>									  
+								</div>
+							</div>							
 						</div>
-					</div>
+					</section>
 				</div>
 				<!-- /PORTFOLIO -->				
 			</div>
 		</div>
-		</div>
 	</div>
 	<!-- /MAINPART -->
 	
-	<!-- MAGIC CURSOR -->
-	<div class="mouse-cursor cursor-outer"></div>
-	<div class="mouse-cursor cursor-inner"></div>
-	<!-- /MAGIC CURSOR -->
+
 		
 </div>
 <!-- / WRAPPER ALL -->
@@ -464,6 +414,7 @@
 	var vue=new Vue({
     	el: "#app",
     	data: {
+			show: false,
 			moi : {},
 			reseaux_sociaux: {},
 			futur_metier: {},
@@ -472,16 +423,20 @@
 			cv_url: null,
 			photo_profil:null,
 			link_refresh : null,
-			portfolio2 : []			
+			portfolio2 : []	,
+			img_porfolio : [],
+			img_porfolio2 : [],
+			test: null,		
 		},
 		created() {
+			this.portfolio_recup();
 			this.set_photo_profile();
 			this.a_propos_de_moi();
 			this.a_propos_de_moi_reseaux_sociaux();
 			this.cv_cv1();
 			this.cv_competence_techniques();
 			this.link_refresh=window.location.href;
-			this.portfolio_recup();
+			
 		}, 
 		methods: {
 			a_propos_de_moi(){
@@ -558,45 +513,68 @@
 						var porto={};
 						snap.docs.forEach(doc => {
 							let img_couv='img/portfolio/'+doc.id+'/couverture.PNG';
-							let s={};
-							console.log(img_couv)
-							console.log(doc.data())
+							
+							var s={};
+							console.log(img_couv);
+							console.log(doc.data());
 							s.doc=doc.data();
+							//this.portfolio2.push(s);
+							let len=this.portfolio2.length;
+							s.img_couverture=null;
+							s.img_additionelle=[];
 							listAll(ref(storage,'img/portfolio/'+doc.id))
 								.then((res) => {
-									console.log(res)
+									console.log(res);
+									
 									let img_additional=[];
 									res.items.forEach((itemRef) => {
 										getDownloadURL(ref(storage,itemRef._location.path_ ))
 											.then((url) => {
+												console.log("rentrr");
 												if(itemRef._location.path_==img_couv) {
 													s.img_couverture=url;
-													//console.log(url)
+													this.test=url;
+													//(this.portfolio2[0]).img=url;
+													console.log(s.img)
 												}else {
 													img_additional.push(url);
+													//this.img_porfolio[this.portfolio2.length-1].push(url);
+													this.img_porfolio2.push(url);
+													this.test=url;
 													//img_additional.push("gs://"+itemRef.bucket+"/"+itemRef._location.path_)
 													//console.log(url)
 												}
 											})
+											.catch((error) => {
+												console.log(error.message)
+											})
 										//console.log(itemRef);
 									})
+									//this.img_porfolio.push(img_additional);
+									//this.portfolio2[0].img_additionelle=img_additional;
 									s.img_additionelle=img_additional;
-									//console.log(img_additional)
+									console.log(s.img_additionelle)
 								})
-								this.portfolio2.push(s)
-								//console.log(s)
+								.catch((error) => {
+									console.log(error.message)
+								})
+								this.portfolio2.push(s);
+								console.log(s)
 						})
-						//console.log(this.portfolio)
+						console.log(this.portfolio2);
+						//console.log(this.img_porfolio);
+						//console.log(this.img_porfolio[0]);
+						//console.log(this.img_porfolio2);
+						//console.log(this.test)
+						//this.portfolio2[0].img_couverture=this.img_porfolio2[0];
 					})
-					.catch((error) => {
-						console.log(error.message)
-					})					
+										
 			}
 		},
 	})
 
 </script>
 <!-- /SCRIPTS -->
-
+<script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
 </body>
 </html>

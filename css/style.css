@@ -36,6 +36,42 @@ html {
 	padding: 0px;
 	margin: 0px
 }
+.protfolio{
+    background-color: #34345238;
+    padding-top: 5%;
+    padding-bottom: 10%;
+    text-align: center;
+    /* padding:15% */
+}
+.img-custome{
+    /*width: 140px;
+    height: 140px;
+    margin-top: 5px;*/
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+.img-add-portfolio{
+    width: 140px;
+    height: 140px;
+    margin-top: 50px;
+	margin-bottom: 50px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+.b-img{
+	margin-top: 5px;
+	margin-bottom: 5px
+}
+.button-custome{
+	width: 100%;
+    height: 100%;
+    margin-top: 5px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
 body{
 	font-family: "Poppins";
 	font-size: 18px;
@@ -45,6 +81,7 @@ body{
 	font-weight: 400;
 	background-color: #fff;
 	color: #888888;
+	padding: 1rem; 
 }
 svg{
 	fill: currentcolor;
