@@ -178,7 +178,7 @@
 							<div class="right">
 								<div class="image parallax" data-relative-input="false">
 									<img src="img/thumbs/47-60.jpg" id="prof" alt="" />
-									<div class="main layer" data-depth="0.05" data-img-url="img/hero/patrice_photo.jpg" id="photo_profil"></div>
+									<div class="main layer" data-depth="0.05" :data-img-url="img/hero/patrice_photo.jpg" id="photo_profil"></div>
 									<span class="box layer" data-depth="0.1"></span>
 								</div>
 							</div>
@@ -276,7 +276,6 @@
 									</li>
 								</ul>
 							</div>
-
 							<div class="info_list">
 								<div class="iknow_tm_resume_title">
 									<h3>Compétences techniques</h3>
@@ -294,8 +293,7 @@
 										</div>
 									</li>
 								</ul>
-							</div>
-							
+							</div>							
 							<div class="info_list">
 								<div class="iknow_tm_resume_title">
 									<h3>Expérience professionnelle</h3>
@@ -320,7 +318,6 @@
 									</li>
 								</ul>
 							</div>
-
 							<div class="info_list">
 								<div class="iknow_tm_resume_title">
 									<h3>Langues</h3>
@@ -346,7 +343,7 @@
 										<img alt="Vue logo" class="rounded-circle img-custome" :src="item.img_couverture"> 
 										<h2>{{item.doc.intitule}}</h2>
 									</b-button>
-									<b-modal :id="item.doc.intitule" size="xl" scrollable >
+									<b-modal :id="item.doc.intitule" size="xl" scrollable hide-footer>
 										<template #modal-header="{ close }">
 											<h5>{{item.doc.intitule}}</h5>
 											<b-button size="sm" variant="outline-danger" @click="close()">
@@ -357,14 +354,19 @@
 										<div>
 											<b-img class="b-img" thumbnail fluid alt="img_couverture" :src="item.img_couverture" >											
 										</div>
-										<div>
-											<div>
-
-											</div>
+										<div ><!--style="width: 100%; display: table;"-->
 											<h5>Details</h5>
 											<p v-for="descript in item.doc.description">
 												{{descript}}
 											</p>
+											<!--<div class="div_l">												
+												<p v-for="descript in item.doc.description">
+													{{descript}}
+												</p>
+											</div>
+											<div class="div_r">
+												dfdfd
+											</div>	-->										
 										</div>
 										<div>
 											<div class="row" class="img-add-portfolio">
@@ -443,7 +445,6 @@
 				getDocs(collection(db, 'a_propos_de_moi'))
 					.then(snapshot => {	
 						snapshot.docs.forEach( doc => {
-							//console.log(doc.data())
 							if(doc.id==="moi") this.moi=doc.data();
 							if(doc.id==="futur_metier") this.futur_metier=doc.data();
 							if(doc.id==="reseaux_sociaux") this.reseaux_sociaux=doc.data();
@@ -457,7 +458,6 @@
 				getDoc(doc(db,'a_propos_de_moi/reseaux_sociaux'))
 					.then(snap => {
 						if(snap.exists()){
-							//console.log(snap.data().linkedin)
 							const link_t=document.getElementById("reseau_linkedin");
 							link_t.setAttribute('href', snap.data().linkedin)
 						}
@@ -468,22 +468,14 @@
 				if(rep.exists()){
 					this.cv=rep.data();
 					this.competence_techniqu=rep.data().competence_techniques;
-					//console.log(this.competence_techniqu.Langages)
-					//console.log(rep.data())
-					//console.log((this.cv.competence_techniques).Langages)
 				}
 			},
 			async cv_competence_techniques(){
-				//console.log("test");
-				//console.log(this.cv);
-				//console.log((this.cv.competence_techniques).Langages);
 				this.competence_techniqu=this.cv.competence_techniques;
 			},
 			set_photo_profile(){
 				getDownloadURL(ref(storage,'img/a_propos_de_moi/patrice_photo.jpg'))
 					.then(url => {
-						//console.log(url);
-						//this.cv_url=url;
 						this.photo_profil=url;
 						const img=document.getElementById('prof2');
 						const img2=document.getElementById('prof3');
@@ -496,7 +488,6 @@
 
 				getDownloadURL(ref(storage,'img/cv/CV_KOUASSI.pdf'))
 					.then(url => {
-						//console.log(url);
 						this.cv_url=url;
 						const img=document.getElementById('mon_cv');
                 		img.setAttribute('href',url);
@@ -512,63 +503,32 @@
 					.then( snap => {						
 						var porto={};
 						snap.docs.forEach(doc => {
-							let img_couv='img/portfolio/'+doc.id+'/couverture.PNG';
-							
+							let img_couv='img/portfolio/'+doc.id+'/couverture.PNG';							
 							var s={};
-							console.log(img_couv);
-							console.log(doc.data());
 							s.doc=doc.data();
-							//this.portfolio2.push(s);
-							let len=this.portfolio2.length;
 							s.img_couverture=null;
 							s.img_additionelle=[];
 							listAll(ref(storage,'img/portfolio/'+doc.id))
-								.then((res) => {
-									console.log(res);
-									
+								.then((res) => {								
 									let img_additional=[];
 									res.items.forEach((itemRef) => {
 										getDownloadURL(ref(storage,itemRef._location.path_ ))
 											.then((url) => {
-												console.log("rentrr");
 												if(itemRef._location.path_==img_couv) {
 													s.img_couverture=url;
-													this.test=url;
-													//(this.portfolio2[0]).img=url;
-													console.log(s.img)
 												}else {
 													img_additional.push(url);
-													//this.img_porfolio[this.portfolio2.length-1].push(url);
-													this.img_porfolio2.push(url);
-													this.test=url;
-													//img_additional.push("gs://"+itemRef.bucket+"/"+itemRef._location.path_)
-													//console.log(url)
 												}
-											})
-											.catch((error) => {
-												console.log(error.message)
-											})
-										//console.log(itemRef);
+											})											
 									})
-									//this.img_porfolio.push(img_additional);
-									//this.portfolio2[0].img_additionelle=img_additional;
 									s.img_additionelle=img_additional;
-									console.log(s.img_additionelle)
-								})
-								.catch((error) => {
-									console.log(error.message)
-								})
+								})								
 								this.portfolio2.push(s);
-								console.log(s)
-						})
-						console.log(this.portfolio2);
-						//console.log(this.img_porfolio);
-						//console.log(this.img_porfolio[0]);
-						//console.log(this.img_porfolio2);
-						//console.log(this.test)
-						//this.portfolio2[0].img_couverture=this.img_porfolio2[0];
+						})						
 					})
-										
+					.catch((error) => {
+						console.log(error.message)
+					})										
 			}
 		},
 	})
